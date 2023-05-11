@@ -13,7 +13,7 @@ export default class Calendar extends Component {
 
   render() {
       return (
-        <div className="w-2/5 min-w-[60%] h-[50px] p-3">
+        <div className="p-3 border">
           <FullCalendar
             // defaultView="dayGridMonth" 
             plugins={[ interactionPlugin , dayGridPlugin, timeGridPlugin ]}
@@ -31,7 +31,7 @@ export default class Calendar extends Component {
                 { title: 'event 2', date: '2023-05-02' },
                 { title: 'event 3', start: '2023-05-03', end: '2023-05-06' },
             ]}
-            height={"480px"}
+            height={"500px"}
             dateClick={this.handleDateClick}
           />
         </div>

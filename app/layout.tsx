@@ -18,8 +18,12 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <Header />
-        {children}
+        <div className='h-screen relative '>
+          <div className='container sm w-2/5 min-w-[60%] h-[830px] mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+            <Header />
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   )

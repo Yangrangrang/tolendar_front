@@ -2,6 +2,7 @@
 import React from 'react'
 import Calendar from '../calendar/Calendar'
 import styled from "@emotion/styled";
+import TodoListPage from '../todolist/page';
 
 export const StyleWrapper = styled.div`
   .fc-toolbar-title {
@@ -40,6 +41,7 @@ export default function DefaultLayout () {
         <Calendar />
       </StyleWrapper>
       {/* todoList Component */}
+      < TodoListPage />
     </>
   )
 
