@@ -1,13 +1,14 @@
 'use client'
-import { useState } from "react"
+import Header from "../Header";
+import calendar from "./Calendar";
+import Calendar from "./Calendar";
 
-
-export default function Calendar() {
-  const [isOpen , setIsOpen] = useState();
+export default function CalendarPage() {
 
   return (
-    <div>
-      Calendar
-    </div>
+    <>
+      <Calendar />
+      {/* 일정리스트 */}
+    </>
   )
 }
