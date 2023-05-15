@@ -1,41 +1,53 @@
+'use client'
+import InputForm from "../signup/InputForm";
+import axios from "axios";
+
 export default function LoginPage () {
-  return (
-    // <div className="login-container flex justify-center items-center h-screen">
-    //   <div className="login-card w-3/5 min-w-[50%] h-[350px] border">
-    //     <p className="text-center text-3xl text-orange-500">Login</p>
-      
-    //   </div>
-    // </div>
+
+    const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+
+        // 폼 데이터 수집
+        const formData = new FormData(e.currentTarget);
+    
+        interface FormData {
+            [key: string] : string | File;
+        }
+        
+        // FormData 객체에 저장된 값을 출력
+        let json : FormData = {};
+        for (let [key, value] of formData.entries()) {
+          console.log(key, value);
+          json[key] = value;
+        }
+
+        axios
+            .post("/api/auth/login", json)
+            .then((response) => {
+                console.log(response.data);
+                // 로컬스토리지에 토큰 저장
+                const json = JSON.stringify(response.data);
+                localStorage.setItem("token",json);
+                location.replace("/");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    return (
+
     <div className="relative flex flex-col justify-center min-h-[85%] overflow-hidden">
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl">
                 <h1 className="text-3xl font-semibold text-center text-orange-400 underline">
-                   Sign in
+                    Login
                 </h1>
-                <form className="mt-6">
-                    <div className="mb-2">
-                        <label
-                            // for="email"
-                            className="block text-m font-semibold text-gray-800"
-                        >
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            className="block w-full px-4 py-2 mt-2 text-orange-700 bg-white border rounded-md focus:border-orange-400 focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                        />
-                    </div>
-                    <div className="mb-2">
-                        <label
-                            // for="password"
-                            className="block text-m font-semibold text-gray-800"
-                        >
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            className="block w-full px-4 py-2 mt-2 text-orange-700 bg-white border rounded-md focus:border-orange-400 focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                        />
-                    </div>
+                <form action={"/api/auth/login"} method="post" className="mt-6" onSubmit={(e) => {
+                    e.preventDefault();
+                    console.log("test");
+                    handleSubmit(e);
+                }}>
+                    < InputForm name = "username" type="text" title="ID" />
+                    < InputForm name = "password" type="password" title="password" />
                     <a
                         href="#"
                         className="text-s text-orange-600 hover:underline"
@@ -43,7 +55,7 @@ export default function LoginPage () {
                         Forget Password?
                     </a>
                     <div className="mt-6">
-                        <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-orange-400 rounded-md hover:bg-orange-300 focus:outline-none focus:bg-purple-600">
+                        <button type="submit" className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-orange-400 rounded-md hover:bg-orange-300 focus:outline-none focus:bg-orange-600">
                             Login
                         </button>
                     </div>

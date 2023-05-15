@@ -1,8 +1,30 @@
 'use client'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function Header () {
-  const [isOpen , setIsOpen] = useState();
+  const [isLoggedIn , setIsLoggedIn ] = useState(false);
+
+  // 로컬스토리지에 토큰이 있는지 확인 (nextjs는 클라이언트사이드에 존재하는 window,document 전역객체를 사용할 수 없다.)
+
+  // 1번째 방법
+  useEffect(()=> {
+    if (typeof window !== 'undefined' && localStorage.getItem('token')) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  })
+
+  // 2번째 방법
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined' && localStorage.getItem('token')) {
+  //     setIsLoggedIn(!isLoggedIn);
+  //   } else {
+  //     setIsLoggedIn(false);
+  //   }
+  // }, [])
+
+  // 있으면 서버에 넘겨서 유효한지 확인
 
   return (
     <>
@@ -23,9 +45,13 @@ export default function Header () {
         </nav>
 
         <span className="navbar-title leading-[50px]"><a href="/">Tolender</a></span>
-        <button className="header-user">
+
+        {isLoggedIn ? (<button className="header-user">
+          <a href="/login">Profile</a>
+        </button>) : (<button className="header-user">
           <a href="/login">Login</a>
-        </button>
+        </button>)}
+
       </header>
     </>
   )
