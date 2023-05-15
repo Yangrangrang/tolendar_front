@@ -1,7 +1,13 @@
-export default function DayCalendar (){
+export default function DayCalendar (props: any){
   return (
     <div className="todolist-container h-60 px-3 mt-1 bg-orange-50 rounded-md">
-      <span>당일일정...날짜 포함 합니다!</span>
+      <span>{props.date}</span>
+      <ul>
+        <li>날짜에 있는 일정리스트</li>
+        <li>날짜에 있는 일정리스트</li>
+        <li>날짜에 있는 일정리스트</li>
+
+      </ul>
     </div>
   )
 }
