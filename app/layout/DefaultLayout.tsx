@@ -3,6 +3,7 @@ import React from 'react'
 import Calendar from '../calendar/Calendar'
 import styled from "@emotion/styled";
 import TodoListPage from '../todolist/page';
+import { createContext } from 'vm';
 
 export const StyleWrapper = styled.div`
   .fc-toolbar-title {
@@ -33,6 +34,10 @@ export const StyleWrapper = styled.div`
     background-color: rgb(253 186 116);
   }
 `
+
+export const UserContext = createContext({
+  
+})
 
 export default function DefaultLayout () {
   return (

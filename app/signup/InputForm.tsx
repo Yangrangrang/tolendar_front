@@ -1,10 +1,9 @@
 import { useRef, useState } from "react";
 
 type data = {
-  // ref?: React.RefObject<HTMLInputElement>,
   name : string,
   type : string,
-  min?: number,
+  min?: number | string,
   max?: number,
   title : string,
 }
@@ -30,7 +29,8 @@ export default function InputForm (props : data){
             name={props.name}
             type={props.type}
             required
-            minLength={props.min}
+            min={props.min}
+            // minLength={props.min}
             maxLength={props.max}
             className="block w-full px-4 py-2 mt-2 text-orange-700 bg-white border rounded-md focus:border-orange-400 focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
         />

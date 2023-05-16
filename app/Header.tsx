@@ -1,21 +1,23 @@
 'use client'
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { UserContext } from "./context/userContext";
 
 export default function Header () {
+  const userContext = useContext(UserContext);
   const [isLoggedIn , setIsLoggedIn ] = useState(false);
 
   // 로컬스토리지에 토큰이 있는지 확인 (nextjs는 클라이언트사이드에 존재하는 window,document 전역객체를 사용할 수 없다.)
 
   // 1번째 방법
   useEffect(()=> {
-    if (typeof window !== 'undefined' && localStorage.getItem('token')) {
+    if (userContext) {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
     }
   })
 
-  // 2번째 방법
+  // 2번째 방법   
   // useEffect(() => {
   //   if (typeof window !== 'undefined' && localStorage.getItem('token')) {
   //     setIsLoggedIn(!isLoggedIn);
@@ -39,7 +41,7 @@ export default function Header () {
 
             <ul className="menu-list absolute top-full left-0 m-0 p-0 bg-white border border-solid border=[#ccc] hidden group-hover:block z-50">
               <li className="p-2 hover:bg-[#f0f0f0]"><a href="/calendar">Calendar</a></li>
-              <li className="p-2 hover:bg-[#f0f0f0]"><a href="#">Todo</a></li>
+              <li className="p-2 hover:bg-[#f0f0f0]"><a href="/todo">Todo</a></li>
             </ul>
           </div>
         </nav>
@@ -47,7 +49,7 @@ export default function Header () {
         <span className="navbar-title leading-[50px]"><a href="/">Tolender</a></span>
 
         {isLoggedIn ? (<button className="header-user">
-          <a href="/login">Profile</a>
+          <a href="/profile">{userContext?.userName}님</a>
         </button>) : (<button className="header-user">
           <a href="/login">Login</a>
         </button>)}

@@ -5,7 +5,8 @@ import axios from "axios";
 export default function LoginPage () {
 
     const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
-
+        e.preventDefault();
+        
         // 폼 데이터 수집
         const formData = new FormData(e.currentTarget);
     
@@ -24,26 +25,29 @@ export default function LoginPage () {
             .post("/api/auth/login", json)
             .then((response) => {
                 console.log(response.data);
+                console.log(response.data.access_token);
                 // 로컬스토리지에 토큰 저장
-                const json = JSON.stringify(response.data);
-                localStorage.setItem("token",json);
-                location.replace("/");
+                if (response.data){
+                    localStorage.setItem("access_token",response.data.access_token);
+                }
+                // redirect
+                // location.replace("/");
             })
             .catch((error) => {
+                alert("아이디나 비밀번호를 확인해 주세요.")
                 console.error(error);
             });
     }
 
     return (
 
-    <div className="relative flex flex-col justify-center min-h-[85%] overflow-hidden">
+        <div className="relative flex flex-col justify-center min-h-[85%] overflow-hidden">
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl">
                 <h1 className="text-3xl font-semibold text-center text-orange-400 underline">
                     Login
                 </h1>
                 <form action={"/api/auth/login"} method="post" className="mt-6" onSubmit={(e) => {
                     e.preventDefault();
-                    console.log("test");
                     handleSubmit(e);
                 }}>
                     < InputForm name = "username" type="text" title="ID" />
@@ -62,8 +66,7 @@ export default function LoginPage () {
                 </form>
 
                 <p className="mt-8 text-s font-light text-center text-gray-700">
-                    {" "}
-                    Don't have an account?{" "}
+                    {" "}Don't have an account?{" "}
                     <a
                         href="/signup"
                         className="font-medium text-orange-600 hover:underline"

@@ -49,7 +49,7 @@ export default function LoginPage () {
                 });
         } else {
             alert("입력값을 확인해 주세요.")
-            // console.log("Validation failed. Please check your input.");
+            console.log("Validation failed. Please check your input.");
         }
     };
 
