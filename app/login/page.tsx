@@ -31,7 +31,7 @@ export default function LoginPage () {
                     localStorage.setItem("access_token",response.data.access_token);
                 }
                 // redirect
-                // location.replace("/");
+                location.href="/";
             })
             .catch((error) => {
                 alert("아이디나 비밀번호를 확인해 주세요.")

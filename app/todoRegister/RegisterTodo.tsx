@@ -4,6 +4,8 @@ import InputForm from "../signup/InputForm";
 import { UserContext } from "../context/userContext";
 import axios from "axios";
 
+
+
 export default function RegisterTodo () {
 
     const userContext = useContext(UserContext);
@@ -59,10 +61,11 @@ export default function RegisterTodo () {
             .post(`/api/todo/register/${userContext?.userId}`, json, {
                 headers: {
                     Authorization: `Bearer ${localData}`,
-                  },
+                },
             })
             .then((response) => {
                 console.log(response.data);
+                location.href="/todo"
             })
             .catch((error) => {
                 alert("입력값을 확인해 주세요.")
