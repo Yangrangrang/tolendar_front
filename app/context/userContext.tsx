@@ -1,51 +1,46 @@
 'use client'
-import React, { createContext, useEffect, useState } from "react";
+import React, {createContext, useContext, useEffect, useState} from "react";
 import axios from "axios";
 
 interface UserContextProps {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }
 
-export const UserContext = createContext<{userId: string | null; userName: string | null} | null>(null);
+export interface User {
+    userId: string;
+    userName: string;
+}
 
-export const UserContextProvider: React.FC<UserContextProps> = ({
-  children,
-}) => {
+export const UserContext = createContext<User | null>(null);
 
-  // userName 값 변경 저장
-  const [userContext, setUserContext] = useState<{userId: string | null; userName: string | null} | null>(null);
+export const UserContextProvider: React.FC<UserContextProps> = ({children}) => {
 
-  useEffect(() => {
-    let userId: string | null = null;
-    let userName : string | null = null;
+    // userName 값 변경 저장
+    const [userContext, setUserContext] = useState<User | null>(null);
 
-    if (typeof window !== "undefined") {
+    useEffect(() => {
+        // 토큰 불러오기
+        const localData = localStorage.getItem("access_token");
 
-      // 토큰 불러오기
-      const localData = localStorage.getItem("access_token");
-
-      if (localData) {
-          axios
-            .get("http://localhost:3000/api/auth/profile", {
-              headers: {
-                Authorization: `Bearer ${localData}`,
-              },
-            })
-            .then((response) => {
-              userId = response.data.sub;
-              userName = response.data.aud;
-              setUserContext({ userId, userName });
-            })
-            .catch((error) => {
-              console.error(error);
+        if (localData) {
+            console.log('프로필 로드')
+            axios.get("http://localhost:3000/api/auth/profile", {
+                headers: {
+                    Authorization: `Bearer ${localData}`,
+                },
+            }).then((response) => {
+                const userId = response.data.sub;
+                const userName = response.data.aud;
+                setUserContext({userId, userName});
+            }).catch((error) => {
+                console.error(error);
             });
-      }
-    }
-  }, []);
+        }
+    }, []);
 
-  return (
-    <UserContext.Provider value={userContext}>
-      {children}
-    </UserContext.Provider>
-  );
+    return (
+        <UserContext.Provider value={userContext}>
+            {children}
+        </UserContext.Provider>
+    );
 };

@@ -42,7 +42,7 @@ export const UserContext = createContext({
 export default function DefaultLayout () {
   return (
     <>
-      < StyleWrapper>
+      <StyleWrapper>
         <Calendar />
       </StyleWrapper>
       {/* todoList Component */}

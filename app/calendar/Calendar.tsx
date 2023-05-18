@@ -13,10 +13,10 @@ export default function Calendar(props: any) {
     props.onDateClick(arg)
   }
 
-  // defaultView="dayGridMonth" 
   return (
     <div className="p-3 border">
       <FullCalendar
+        // defaultView="dayGridMonth" 
         plugins={[ interactionPlugin , dayGridPlugin, timeGridPlugin ]}
         headerToolbar={{
           left: "prev,next today",

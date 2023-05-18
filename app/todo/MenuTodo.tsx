@@ -3,24 +3,24 @@ import axios from "axios";
 import Todo, { TodoData } from "../todolist/Todo";
 import TodoList from "../todolist/TodoList";
 import { useContext , useState , useEffect } from "react";
-import { UserContext } from "../context/userContext";
+import {User, UserContext} from "../context/userContext";
 import MenuTodoList from "./MenuTodoList";
 
-export type UserContextType = { 
-    userId: string | null; 
-    userName: string | null 
-} | null;
+// export type UserContextType = {
+//     userId: string | null;
+//     userName: string | null
+// } | null;
 
 export default function MenuTodo () {
     const [inProgressTodoList, setInProgressTodoList] = useState<TodoData[]>([]);
     const [completedTodoList, setCompletedTodoList] = useState([]);
     const [pastTodoList, setPastTodoList] = useState([]);
 
-    const userContext = useContext<UserContextType>(UserContext);
+    const userContext = useContext<User | null>(UserContext);
 
-    
     useEffect(() => {
-        console.log('userContext?.userId = ', userContext?.userId);
+
+            console.log('userContext=',userContext)
 
         // 토큰 불러오기
         const localData = localStorage.getItem("access_token");
@@ -69,7 +69,7 @@ export default function MenuTodo () {
             });
         }
             
-    },[userContext?.userId]);
+    },[userContext]);
 
     return (
         <div className="mt-2">

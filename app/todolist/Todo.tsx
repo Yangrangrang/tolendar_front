@@ -2,8 +2,7 @@
 
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/userContext";
-import { UserContextType } from "../todo/MenuTodo";
+import {User, UserContext} from "../context/userContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -20,7 +19,7 @@ export default function Todo (props : TodoData){
   const [ isChecked, setIsChecked ]= useState(props.isDone);
   // console.log(props.isDone);
 
-  const userContext = useContext<UserContextType>(UserContext);
+  const userContext = useContext<User | null>(UserContext);
   // const router = useRouter();
   
   const handlerCheckBoxChange = () => {

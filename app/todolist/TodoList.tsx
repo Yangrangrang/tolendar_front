@@ -1,35 +1,38 @@
 import { useContext, useEffect, useState } from "react";
 import MenuTodoList from "../todo/MenuTodoList";
 import Todo, { TodoData } from "./Todo";
-import { UserContextType } from "../todo/MenuTodo";
-import { UserContext } from "../context/userContext";
+import {User, UserContext} from "../context/userContext";
 import axios from "axios";
 
 export default function TodoList () {
   const [inProgressTodoList, setInProgressTodoList] = useState<TodoData[]>([]);
 
-  const userContext = useContext<UserContextType>(UserContext);
+  const userContext = useContext<User | null>(UserContext);
 
   useEffect(()=> {
 
-    // 토큰 불러오기
-    const localData = localStorage.getItem("access_token");
+    if (userContext?.userId) {
+        console.log('inProgressList');
 
-    // 진행중
-    axios
-    .get(`http://localhost:3000/api/todo/inProgressList/${userContext?.userId}`, {
-        headers: {
-            Authorization: `Bearer ${localData}`,
-        },
-    })
-    .then((response) => {
-        setInProgressTodoList(response.data);
-    })
-    .catch((error) => {
-        console.error(error);
-    });
-    
-  },[userContext?.userId]);
+        // 토큰 불러오기
+        const localData = localStorage.getItem("access_token");
+
+        // 진행중
+        axios
+            .get(`http://localhost:3000/api/todo/inProgressList/${userContext?.userId}`, {
+                headers: {
+                    Authorization: `Bearer ${localData}`,
+                },
+            })
+            .then((response) => {
+                setInProgressTodoList(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+  },[userContext]);
 
 
   return (
