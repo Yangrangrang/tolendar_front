@@ -6,7 +6,7 @@ import { useContext , useState , useEffect } from "react";
 import { UserContext } from "../context/userContext";
 import MenuTodoList from "./MenuTodoList";
 
-type UserContextType = { 
+export type UserContextType = { 
     userId: string | null; 
     userName: string | null 
 } | null;
@@ -24,7 +24,6 @@ export default function MenuTodo () {
         // 토큰 불러오기
         const localData = localStorage.getItem("access_token");
     
-        // 서버에서 데이터 받아오기
         // 진행중
         axios
             .get(`http://localhost:3000/api/todo/inProgressList/${userContext?.userId}`, {
@@ -71,9 +70,9 @@ export default function MenuTodo () {
 
     return (
         <div className="mt-2">
-            <MenuTodoList todos={pastTodoList} title="지난 Todo" length={pastTodoList.length} color="text-rose-600"/>
-            <MenuTodoList todos={inProgressTodoList} title="예정 Todo" length={inProgressTodoList.length}/>
-            <MenuTodoList todos={completedTodoList} title="완료 Todo" length={completedTodoList.length}/>
+            <MenuTodoList todos={pastTodoList} title="지난 Todo" length={pastTodoList.length} color="text-rose-600" text="더보기"/>
+            <MenuTodoList todos={inProgressTodoList} title="예정 Todo" length={inProgressTodoList.length} text="더보기"/>
+            <MenuTodoList todos={completedTodoList} title="완료 Todo" length={completedTodoList.length} text="더보기"/>
 
             <div className="btn-container flex justify-between mt-3">
                     <button className="py-2 w-[100%] rounded-full bg-orange-400 text-white"><a href="/todoRegister">할일 등록</a></button>

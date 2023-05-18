@@ -63,7 +63,7 @@ export default function LoginPage () {
                     e.preventDefault();
                     handleSubmit(e);
                 }}>
-                    < InputForm title="ID" name = "username" type = "text" />
+                    < InputForm title="ID" name = "userId" type = "text" />
                     < InputForm title="name" name = "name" type = "text"/>
                     < PasswordInputForm setInputPasswordCheck={passwordCheckInput}/>
                     < InputForm title="email" name = "email" type = "email"/>
