@@ -64,11 +64,12 @@ export default function Todo (props : TodoData){
   // data Update click이벤트
   const handlerUpdateClick = () => {
     console.log("click");
+    location.href=`/todo/update/${props.id}`;
   }
 
   // data Delte click이벤트
   const handlerDeleteClick = () => {
-    console.log("click");
+    // console.log("click");
 
     // 삭제 여부 확인
     const confirmDelete = window.confirm("정말 삭제하시겠습니까?");

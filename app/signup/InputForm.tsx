@@ -6,6 +6,7 @@ type data = {
   min?: number | string,
   max?: number,
   title : string,
+  value? : string,
 }
 
 export default function InputForm (props : data){
@@ -30,7 +31,7 @@ export default function InputForm (props : data){
             type={props.type}
             required
             min={props.min}
-            // minLength={props.min}
+            value={props.value}
             maxLength={props.max}
             className="block w-full px-4 py-2 mt-2 text-orange-700 bg-white border rounded-md focus:border-orange-400 focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
         />
