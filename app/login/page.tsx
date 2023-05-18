@@ -53,7 +53,7 @@ export default function LoginPage () {
                     < InputForm name = "username" type="text" title="ID" />
                     < InputForm name = "password" type="password" title="password" />
                     <a
-                        href="#"
+                        // href="#"
                         className="text-s text-orange-600 hover:underline"
                     >
                         Forget Password?
@@ -66,7 +66,7 @@ export default function LoginPage () {
                 </form>
 
                 <p className="mt-8 text-s font-light text-center text-gray-700">
-                    {" "}Don't have an account?{" "}
+                    <span>{" "}Don't have an account?{" "}</span>
                     <a
                         href="/signup"
                         className="font-medium text-orange-600 hover:underline"

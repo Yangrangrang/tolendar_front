@@ -20,12 +20,14 @@ export default function MenuTodo () {
 
     
     useEffect(() => {
-        
+        console.log('userContext?.userId = ', userContext?.userId);
+
         // 토큰 불러오기
         const localData = localStorage.getItem("access_token");
     
         // 진행중
-        axios
+        if (userContext?.userId !== '') {
+            axios
             .get(`http://localhost:3000/api/todo/inProgressList/${userContext?.userId}`, {
                 headers: {
                     Authorization: `Bearer ${localData}`,
@@ -65,6 +67,7 @@ export default function MenuTodo () {
             .catch((error) => {
                 console.error(error);
             });
+        }
             
     },[userContext?.userId]);
 
@@ -75,7 +78,7 @@ export default function MenuTodo () {
             <MenuTodoList todos={completedTodoList} title="완료 Todo" length={completedTodoList.length} text="더보기"/>
 
             <div className="btn-container flex justify-between mt-3">
-                    <button className="py-2 w-[100%] rounded-full bg-orange-400 text-white"><a href="/todoRegister">할일 등록</a></button>
+                <button className="py-2 w-[100%] rounded-full bg-orange-400 text-white"><a href="/todoRegister">할일 등록</a></button>
             </div>
         </div>
     )

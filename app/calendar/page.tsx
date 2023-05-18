@@ -1,11 +1,11 @@
 'use client'
-import Header from "../Header";
-import calendar from "./Calendar";
 import Calendar from "./Calendar";
 import styled from "@emotion/styled";
 import DayCalendar from "./DayCalendar";
 import { useState } from "react";
+import dayjs from "dayjs";
 
+// 캘린더 스타일 적용
 export const StyleWrapper = styled.div`
   .fc-toolbar-title {
     font-size: 18px;
@@ -37,23 +37,9 @@ export const StyleWrapper = styled.div`
 `
 
 export default function CalendarPage() {
-  function dateFormat(date: any) {
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    let hour = date.getHours();
-    let minute = date.getMinutes();
-    let second = date.getSeconds();
 
-    month = month >= 10 ? month : '0' + month;
-    day = day >= 10 ? day : '0' + day;
-    hour = hour >= 10 ? hour : '0' + hour;
-    minute = minute >= 10 ? minute : '0' + minute;
-    second = second >= 10 ? second : '0' + second;
-
-    return date.getFullYear() + '-' + month + '-' + day;
-  }
-
-  const [date, setDate] = useState(dateFormat(new Date()));
+  // 오늘 날짜로 기본 설정
+  const [date, setDate] = useState(dayjs(new Date()).format('YYYY-MM-DD'));
 
   const onDateClick = (args: any) => {
     console.log(args)
@@ -62,7 +48,7 @@ export default function CalendarPage() {
 
   return (
     <>
-      < StyleWrapper>
+      <StyleWrapper>
         <Calendar onDateClick={onDateClick}/>
       </StyleWrapper>
       {/* 일정리스트 */}

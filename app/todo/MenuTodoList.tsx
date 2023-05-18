@@ -37,7 +37,7 @@ export default function MenuTodoList (props : MenuTodoListProps){
                 {props.text ? 
                 (<div className="flex justify-between py-3">
                     <span>{props.title}</span>
-                    <span><a href={props.link}>{props.text}</a></span>
+                    <a href={props.link}>{props.text}</a>
                 </div>) : <div className="py-1"></div>}
                 {/* doList */}
                 {props.length > 0 ? isTodoList() : <div>일정이 없습니다.</div>}

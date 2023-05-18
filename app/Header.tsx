@@ -15,7 +15,7 @@ export default function Header () {
     } else {
       setIsLoggedIn(false);
     }
-  })
+  }, [userContext])
 
   // 2번째 방법   
   // useEffect(() => {
