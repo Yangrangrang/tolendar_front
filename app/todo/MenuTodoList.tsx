@@ -1,7 +1,7 @@
 
 'use client'
 import { useEffect, useState } from "react";
-import Todo, { TodoData } from "../todolist/Todo"
+import Todo, { TodoData } from "./Todo"
 
 type MenuTodoListProps = {
     todos : TodoData[];

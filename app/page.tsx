@@ -1,5 +1,5 @@
 import Header from './Header'
-import DefaultLayout from './layout/DefaultLayout'
+import DefaultLayout from './components/DefaultLayout'
 
 export default function Home() {
   return (

@@ -38,21 +38,21 @@ export const StyleWrapper = styled.div`
 
 export default function CalendarPage() {
 
-  // 오늘 날짜로 기본 설정
-  const [date, setDate] = useState(dayjs(new Date()).format('YYYY-MM-DD'));
+    // 오늘 날짜로 기본 설정
+    const [date, setDate] = useState(dayjs(new Date()).format('YYYY-MM-DD'));
 
-  const onDateClick = (args: any) => {
-    console.log(args)
-    setDate(args.dateStr)
-  }
+    const onDateClick = (args: any) => {
+        console.log(args)
+        setDate(args.dateStr)
+    }
 
-  return (
-    <>
-      <StyleWrapper>
-        <Calendar onDateClick={onDateClick}/>
-      </StyleWrapper>
-      {/* 일정리스트 */}
-      <DayCalendar date={date}/>
-    </>
-  )
+    return (
+        <>
+        <StyleWrapper>
+            <Calendar onDateClick={onDateClick}/>
+        </StyleWrapper>
+        {/* 일정리스트 */}
+        <DayCalendar date={date}/>
+        </>
+    )
 }

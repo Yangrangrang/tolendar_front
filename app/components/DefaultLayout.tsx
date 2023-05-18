@@ -2,8 +2,8 @@
 import React from 'react'
 import Calendar from '../calendar/Calendar'
 import styled from "@emotion/styled";
-import TodoListPage from '../todolist/page';
 import { createContext } from 'vm';
+import TodoList from '../todo/TodoList';
 
 export const StyleWrapper = styled.div`
   .fc-toolbar-title {
@@ -40,14 +40,14 @@ export const UserContext = createContext({
 })
 
 export default function DefaultLayout () {
-  return (
-    <>
-      <StyleWrapper>
-        <Calendar />
-      </StyleWrapper>
-      {/* todoList Component */}
-      < TodoListPage />
-    </>
-  )
+    return (
+        <>
+        <StyleWrapper>
+            <Calendar />
+        </StyleWrapper>
+        {/* todoList Component */}
+        <TodoList />
+        </>
+    )
 
 }

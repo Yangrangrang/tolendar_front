@@ -1,7 +1,7 @@
 'use client'
 import axios from "axios";
-import Todo, { TodoData } from "../todolist/Todo";
-import TodoList from "../todolist/TodoList";
+import Todo, { TodoData } from "./Todo";
+import TodoList from "./TodoList";
 import { useContext , useState , useEffect } from "react";
 import {User, UserContext} from "../context/userContext";
 import MenuTodoList from "./MenuTodoList";
@@ -20,13 +20,13 @@ export default function MenuTodo () {
 
     useEffect(() => {
 
-            console.log('userContext=',userContext)
+        // console.log('userContext=',userContext)
 
         // 토큰 불러오기
         const localData = localStorage.getItem("access_token");
     
         // 진행중
-        if (userContext?.userId !== '') {
+        if (userContext?.userId) {
             axios
             .get(`http://localhost:3000/api/todo/inProgressList/${userContext?.userId}`, {
                 headers: {
@@ -67,6 +67,7 @@ export default function MenuTodo () {
             .catch((error) => {
                 console.error(error);
             });
+
         }
             
     },[userContext]);
