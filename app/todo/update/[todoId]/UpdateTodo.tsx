@@ -128,7 +128,7 @@ export default function UpdateTodo ( props : UpdateTodoProps) {
                 <h1 className="text-3xl font-semibold text-center text-orange-400 underline pt-3">
                    To-do 수정
                 </h1>
-                <form action={`/api/todo/register/${userContext?.userId}`} method="post" className="mt-6" onSubmit={(e) => {
+                <form method="post" className="mt-6" onSubmit={(e) => {
                     e.preventDefault();
                     handleSubmit(e);
                 }}>

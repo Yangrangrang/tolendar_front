@@ -46,7 +46,7 @@ export default function LoginPage () {
                 <h1 className="text-3xl font-semibold text-center text-orange-400 underline">
                     Login
                 </h1>
-                <form action={"/api/auth/login"} method="post" className="mt-6" onSubmit={(e) => {
+                <form method="post" className="mt-6" onSubmit={(e) => {
                     e.preventDefault();
                     handleSubmit(e);
                 }}>
