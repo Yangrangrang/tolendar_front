@@ -42,6 +42,7 @@ export default function RegisterTodo () {
 
         // 폼 데이터 수집
         const formData = new FormData(e.currentTarget);
+        console.log(e.currentTarget);
     
         interface FormData {
             [key: string] : string | File;
@@ -56,6 +57,7 @@ export default function RegisterTodo () {
         }
 
         const localData = localStorage.getItem("access_token");
+        console.log(json);
 
         axios
             .post(`/api/todo/register/${userContext?.userId}`, json, {
@@ -65,7 +67,7 @@ export default function RegisterTodo () {
             })
             .then((response) => {
                 console.log(response.data);
-                location.href="/todo"
+                // location.href="/todo"
             })
             .catch((error) => {
                 alert("입력값을 확인해 주세요.")

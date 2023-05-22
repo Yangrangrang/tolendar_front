@@ -2,7 +2,6 @@
 import React from 'react'
 import Calendar from '../calendar/Calendar'
 import styled from "@emotion/styled";
-import { createContext } from 'vm';
 import TodoList from '../todo/TodoList';
 
 export const StyleWrapper = styled.div`
@@ -15,7 +14,7 @@ export const StyleWrapper = styled.div`
     background-color: rgb(251 146 60);
     border : none;
   }
-  .fc-today-button  {
+  .fc .fc-today-button  {
     padding : 0.3em 0.4em;
     font-size : 14px;
     background-color: rgb(251 146 60);
@@ -30,20 +29,22 @@ export const StyleWrapper = styled.div`
   .fc-today-button:hover {
     background-color: rgb(234 88 12);
   }
-  .fc-today-button:disabled {
+  .fc .fc-today-button:disabled {
     background-color: rgb(253 186 116);
   }
 `
 
-export const UserContext = createContext({
-  
-})
 
 export default function DefaultLayout () {
+
+    const onDateClick = (args: any) => {
+        // alert(args.dateStr)
+    }
+
     return (
         <>
         <StyleWrapper>
-            <Calendar />
+            <Calendar eventFunction={onDateClick}/>
         </StyleWrapper>
         {/* todoList Component */}
         <TodoList />

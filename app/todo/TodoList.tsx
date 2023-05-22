@@ -11,26 +11,26 @@ export default function TodoList () {
 
     useEffect(()=> {
 
-    if (userContext?.userId) {
-        // console.log('inProgressList');
+        if (userContext?.userId) {
+            // console.log('inProgressList');
 
-        // 토큰 불러오기
-        const localData = localStorage.getItem("access_token");
+            // 토큰 불러오기
+            const localData = localStorage.getItem("access_token");
 
-        // 진행중
-        axios
-            .get(`http://localhost:3000/api/todo/inProgressList/${userContext?.userId}`, {
-                headers: {
-                    Authorization: `Bearer ${localData}`,
-                },
-            })
-            .then((response) => {
-                setInProgressTodoList(response.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
+            // 진행중
+            axios
+                .get(`http://localhost:3000/api/todo/inProgressList/${userContext?.userId}`, {
+                    headers: {
+                        Authorization: `Bearer ${localData}`,
+                    },
+                })
+                .then((response) => {
+                    setInProgressTodoList(response.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
 
     },[userContext]);
 
