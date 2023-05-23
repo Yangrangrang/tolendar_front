@@ -105,7 +105,7 @@ export default function UpdateTodo ( props : UpdateTodoProps) {
             })
             .then((response) => {
                 console.log(response.data);
-                // location.href="/todo"
+                location.href="/todo"
             })
             .catch((error) => {
                 alert("입력값을 확인해 주세요.")
