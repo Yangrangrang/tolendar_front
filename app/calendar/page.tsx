@@ -36,7 +36,15 @@ export const StyleWrapper = styled.div`
   .fc .fc-today-button:disabled {
     background-color: rgb(253 186 116);
   }
-`
+  .fc-day-sat a {
+    color: blue;
+    text-decoration: none;
+  }
+  .fc-day-sun a {
+    color: red;
+    text-decoration: none;
+  }
+  `
 
 export default function CalendarPage() {
 

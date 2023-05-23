@@ -11,6 +11,7 @@ import ModalInfosEventCalendar, { updateEventCalendar } from './ModalInfosEventC
 import { User, UserContext } from '../context/userContext'
 import axios from 'axios'
 import { title } from 'process'
+import googleCalendarPlugin from '@fullcalendar/google-calendar';
 
 // 받아올 캘린더 데이터 인터페이스
 export interface IEventCalendar {
@@ -104,7 +105,8 @@ export default function Calendar(props : CalendarProps) {
             serveSideData();
         }
     },[userContext])
-
+    // console.log(process.env.GOOGLE_API);
+    const apiKey = process.env.GOOGLE_API;
 
     return (
         <div className="p-3 border">
@@ -120,7 +122,8 @@ export default function Calendar(props : CalendarProps) {
         <FullCalendar
             // defaultView="dayGridMonth" 
             locale="ko"
-            plugins={[ interactionPlugin , dayGridPlugin, timeGridPlugin ]}  // 플러그인 배열 전달
+            plugins={[ interactionPlugin , dayGridPlugin, timeGridPlugin ,googleCalendarPlugin]}  // 플러그인 배열 전달
+            // googleCalendarApiKey={process.env.GOOGLE_API}
             initialView="dayGridMonth"                                       // 초기 뷰 day로 설정 (딱히 설정 안해도 달은 기본설정)
             headerToolbar={{                                                 // 헤더 도구 모음
             left: "prev,next today",
@@ -140,6 +143,15 @@ export default function Calendar(props : CalendarProps) {
             height={"500px"}                                                // 높이 설정
             select={handleAddEventSelectAndOpenModal}                                       // 일정 선택 시 실행 이벤트 핸들러 함수
             dateClick={handleDateClick}
+            buttonText={{
+                today: "오늘",
+                month: "월별",
+                week: "주별",
+                day: "일별",
+            }}
+            // eventSources={[{googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com' , className : 'ko_event' }]}
+            // eventTextColor={'#FFF'}
+            // eventColor={'#F2921D'}
         />
         </div>
     )
